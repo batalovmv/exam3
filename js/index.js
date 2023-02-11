@@ -134,8 +134,8 @@ for (; ;) {
   } else if (parseInt(typeAttack) === 5) {//выпить ласточку
     Witcher.drinkSwallow()
     console.log('Вылечено ' + swallow + ' hp');
-    console.log('Осталось здоровья у ведьмака :' + Witcher.getStatus());
-    console.log('Осталось здоровья у Грифона :' + Griffin.getStatus());
+    console.log('Текущее здоровье Ведьмака :' + Witcher.getStatus());
+  
   }
   if (!gameStatus && dieStatus === Griffin) {
     alert('Грифон мертв, игра закончена')
