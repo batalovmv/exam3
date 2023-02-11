@@ -3,6 +3,7 @@ let damageGriffin = 0
 let typeAttack = 0
 let gameStatus = true
 let igni = 0
+let swallow = 0
 
 function lutikRandom() {
   return Math.floor(Math.random() * (lutik.length))
@@ -65,6 +66,10 @@ const Witcher = {
       this.hp = 0
     }
     return this.hp
+  },
+  drinkSwallow: function () {
+    swallow = Math.floor(Math.random() * (200 - 100 + 1)) + 100
+    this.changeHP(-swallow)
   }
 
 
@@ -84,8 +89,8 @@ function rand() {
 for (let i = 0; i < 15; i++) {
   console.log('Ходит ведьмак');
   for (; ;) {
-    typeAttack = prompt('Введите тип атаки : \n 1 - Обычная атака \n 2 - Игни \n 3 - Слушать лютика \n 4 - Убежать')
-    if (isFinite(typeAttack) && typeAttack % 1 === 0 && typeAttack >= 1 && typeAttack <= 4) {
+    typeAttack = prompt('Введите тип атаки : \n 1 - Обычная атака \n 2 - Игни \n 3 - Слушать лютика \n 4 - Убежать \n 5 - Выпить ласточку')
+    if (isFinite(typeAttack) && typeAttack % 1 === 0 && typeAttack >= 1 && typeAttack <= 5) {
       console.log('Выбрана атака - ' + typeAttack);
       break
     } else if (typeAttack === null) {
@@ -113,19 +118,25 @@ for (let i = 0; i < 15; i++) {
   } else if (parseInt(typeAttack) === 2) {//игни
     Griffin.changeHP(getIgniDamage())
     if (Griffin.hp > 0) {
-      console.log(' Нанесено урона : ' + igni + '\n Осталось здоровья у грифона :' + Griffin.getStatus() + ' hp');
+      console.log(' Нанесено урона c помощью Игни : ' + igni + '\n Осталось здоровья у грифона :' + Griffin.getStatus() + ' hp');
     } else {
-      console.log(' Нанесено урона : ' + damageWitcher + '\n Осталось здоровья у грифона : 0');
+      console.log(' Нанесено урона с помощью Игнип : ' + damageWitcher + '\n Осталось здоровья у грифона : 0');
       dieStatus = Griffin
       gameStatus = false
     }
   } else if (parseInt(typeAttack) === 3) {//лютик
-    console.log(lutik[lutikRandom()]);
+    console.log('Лютик напевает :'+lutik[lutikRandom()]);
   } else if (parseInt(typeAttack) === 4) {//убежать
+    alert('Вы бежали с поля боя, какой позор')
     console.log('Ведьмак бежал с поля боя');
     console.log('Осталось здоровья у ведьмака :' + Witcher.getStatus());
-    console.log('Осталось здоровья у Грифона' + Griffin.getStatus());
+    console.log('Осталось здоровья у Грифона :' + Griffin.getStatus());
     break
+  } else if (parseInt(typeAttack) === 5) {//выпить ласточку
+    Witcher.drinkSwallow()
+    console.log('Вылечено ' + swallow + ' hp');
+    console.log('Осталось здоровья у ведьмака :' + Witcher.getStatus());
+    console.log('Осталось здоровья у Грифона :' + Griffin.getStatus());
   }
   if (!gameStatus && dieStatus === Griffin) {
     alert('Грифон мертв, игра закончена')
@@ -136,6 +147,7 @@ for (let i = 0; i < 15; i++) {
       Witcher.changeHP(Griffin.damage())
     } else {
       console.log(' Грифон ничего не сделал');
+      continue
     }
     if (Witcher.getStatus() > 0) {
       console.log(' Нанесено урона : ' + damageGriffin + '\n Осталось здоровья у ведьмака :' + Witcher.getStatus() + ' hp');
