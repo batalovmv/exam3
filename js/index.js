@@ -27,7 +27,7 @@ const Griffin = {
 
   str: 150,      // Сила
 
-  weapon: 100,    // Оружие
+  weapon: 0,    // Оружие
   changeHP: function (amount) {
     this.hp = this.hp + (-amount)
     if (this.hp < 0) {
@@ -86,7 +86,7 @@ function rand() {
 
 
 
-for (let i = 0; i < 15; i++) {
+for (; ;) {
   console.log('Ходит ведьмак');
   for (; ;) {
     typeAttack = prompt('Введите тип атаки : \n 1 - Обычная атака \n 2 - Игни \n 3 - Слушать лютика \n 4 - Убежать \n 5 - Выпить ласточку')
@@ -94,7 +94,6 @@ for (let i = 0; i < 15; i++) {
       console.log('Выбрана атака - ' + typeAttack);
       break
     } else if (typeAttack === null) {
-      alert('Вы бежали с поля боя, какой позор')
       typeAttack = 4
       break
     } else {
@@ -125,7 +124,7 @@ for (let i = 0; i < 15; i++) {
       gameStatus = false
     }
   } else if (parseInt(typeAttack) === 3) {//лютик
-    console.log('Лютик напевает :'+lutik[lutikRandom()]);
+    console.log('Лютик напевает :' + lutik[lutikRandom()]);
   } else if (parseInt(typeAttack) === 4) {//убежать
     alert('Вы бежали с поля боя, какой позор')
     console.log('Ведьмак бежал с поля боя');
